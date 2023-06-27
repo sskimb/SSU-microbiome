@@ -43,3 +43,8 @@ We recommend the following procedure:
 1. Create **${WORKDIR}/${PROJECT}.files** using mothur's "make.file" command
 2. Split it into desired number of files using linux "split" command, so that **${WORKDIR}/${PROJECT}.files.${SPLIT}** files are to be created where **${SPLIT}** runs from 0 through the number of chunks minus 1.
 3. Submit the split jobs to the batch queue (see [example scripting for HT condor or PBS](https://docs.google.com/document/d/12PcD8N30HdgR6bOFgEOAc9YXVcbsCr7CsZGO4HGPDJc/edit?usp=sharing)) 
+### A note on job failure and rerun
+For each **${WORKDIR}/${PROJECT}.files.${SPLIT}**, corresponding **${WORKDIR}/${PROJECT}.samples.${SPLIT}** is created upon successful processing. Sometimes some jobs may fail due to various reasons. If that happens, one can resubmit all the split jobs again, rather than pinpointing the failed jobs and resubmitting them only. 
+If all the split jobs are resubmit, this script first checks the presence of **${SM}.asn.gz** for each line of **${WORKDIR}/${PROJECT}.files.${SPLIT}**. If it is found, count the number of lines. 
+If it is successfully counted, the script assumes that processing of that sample was successful in the preceding round and skip its processing, moving to the next sample. 
+If the **${SM}.asn.gz** is not found or the line counting was unsuccessful, the sample is processed by this script. Once the processing is successfully finished for a sample, its line count is saved in **${WORKDIR}/${PROJECT}.samples.${SPLIT}**.
