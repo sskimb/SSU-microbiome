@@ -1,7 +1,7 @@
 # SSU-microbiome
 ## A Streamlined Pipeline based on HmmUFOtu for Microbial Community Profiling Using 16S rRNA Amplicon Sequencing
 
-Microbial community profiling using 16S rRNA amplicon sequencing allows for taxonomic characterization of diverse microorganisms. We present a streamlined pipeline that integrates FastP for read trimming, HmmUFOtu for OTU clustering, Vsearch for chimera checking, and Kraken2 for taxonomic assignment.
+Microbial community profiling using 16S rRNA amplicon sequencing allows for taxonomic characterization of diverse microorganisms. We present a streamlined pipeline that integrates [FastP](https://github.com/OpenGene/fastp) for read trimming, [HmmUFOtu](https://github.com/Grice-Lab/HmmUFOtu) for OTU clustering, [Vsearch](https://mothur.org/wiki/chimera.vsearch/) for chimera checking, and [Kraken2](https://ccb.jhu.edu/software/kraken2/) for taxonomic assignment.
 
 The pipeline proposed in this study is outlined in the following figure:
 ![Overview](https://github.com/sskimb/SSU-microbiome/assets/12622306/a04892a1-f9d1-44b1-aab3-4b64a2af123d)
