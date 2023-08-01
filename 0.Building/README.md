@@ -7,7 +7,7 @@ From the downloaded pre-built HmmUFOtu database, extract several text files usin
 - input: gg_97_otus_GTR (inclusives of '.msa', '.hmm', '.ptu', '.csfm')
 - output1: gg_97_otus_GTR.tree
 - output2: gg_97_otus_GTR.anno
-- output3: gg_97_otus_GTR.seq
+- output3: gg_97_otus_GTR.seq (in aligned fasta format)
 
 ## read.tree in the R ape package
 Read in the phylogenetic tree using *read.tree* function of R ape package and save the lists of tips and internal nodes separately.
@@ -24,15 +24,15 @@ HmmUFOtu reference tree includes both tips and internal nodes. The corresponding
 - output2: gg_97_otus_GTR.nodes.seq
 
 ## cmbuilding.bash
-Here we use *cmbuild* program in Infernal package to build consensus model from the multiple alignment of gg_97_otus saved in the Stockholm format.
+Here we use *cmbuild* program in the [Infernal package](http://eddylab.org/infernal/) (version 1.1.4) to build covariance model from the multiple alignment of gg_97_otus saved in aligned fasta format, which can be converted to Stockholm format using *esl-reformat* from the [Easel package](https://github.com/EddyRivasLab/easel).
 - input: gg_97_otus_GTR.tips.stk
 - output: gg_97_otus_GTR_tips.cm
 
 ## cmaligning.bash
-Against the consensus model created above, the RDP18 sequences are aligned using *cmalign*.
+Against the covariance model created above, the RDP18 sequences are aligned using *cmalign*. The output is in Stockholm format, which can be converted to aligned fasta format using *esl-reformat* from the [Easel package](https://github.com/EddyRivasLab/easel).
 - input1: gg_97_otus_GTR.tips.stk
 - input2: gg_97_otus_GTR_tips.cm
-- input3: RDP18.fa
+- input3: RDP18.fa (*trainset18_062020.fa* from the RDP 18 traininset)
 - output1: gg_97_otus_GTR.RDP18.stk
 - output2: gg_97_otus_GTR.RDP18.score
 
@@ -42,7 +42,7 @@ The MSA created above requires some adjustments, which can be done with *adjustM
 - output: gg_97_otus_GTR.RDP18.adjusted.fasta
 
 ## FastTree.bash
-Create a phylogenetic tree based on generalized time reversal model.
+Create a phylogenetic tree based on generalized time-reversal model using [FastTreeMP](http://www.microbesonline.org/fasttree/) (version 2.1.11 SSE3 OpenMP).
 - input: gg_97_otus_GTR.RDP18.adjusted.fasta
 - output: gg_97_otus_GTR.RDP18.adjusted.fast.tree
 
